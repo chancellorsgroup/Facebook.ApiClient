@@ -1,4 +1,5 @@
-﻿using Facebook.ApiClient.Constants;
+﻿using System;
+using Facebook.ApiClient.Constants;
 using Facebook.ApiClient.Exceptions;
 
 namespace Facebook.ApiClient.ApiEngine
@@ -6,6 +7,7 @@ namespace Facebook.ApiClient.ApiEngine
     /// <summary>
     /// Represents Facebook api client. It contains information required for doing api calls
     /// </summary>
+    [Serializable]
     public class ApiClient
     {
         /// <summary>
