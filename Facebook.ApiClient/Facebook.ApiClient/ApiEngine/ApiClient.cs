@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Facebook.ApiClient.Constants;
 using Facebook.ApiClient.Exceptions;
 
@@ -37,6 +38,9 @@ namespace Facebook.ApiClient.ApiEngine
         /// <param name="version"><see cref="Version"/></param>
         public ApiClient(string accessToken, string version)
         {
+            // force TLSv1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             _setApiVersion(version);
             _setAccessToken(accessToken);
         }
@@ -50,6 +54,9 @@ namespace Facebook.ApiClient.ApiEngine
         /// <param name="version"><see cref="Version"/></param>
         public ApiClient(string appId, string appSecret, string accessToken, string version)
         {
+            // force TLSv1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             _setApiVersion(version);
             _setAccessToken(accessToken);
             _setAppId(appId, appSecret);
