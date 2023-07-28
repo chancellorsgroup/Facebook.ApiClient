@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using Facebook.ApiClient.Entities.ApiEngine;
 using Facebook.ApiClient.Enumerations.ApiEngine;
 using Facebook.ApiClient.Exceptions;
@@ -40,6 +41,11 @@ namespace Facebook.ApiClient.ApiEngine
         /// <inheritdoc />
         public IResponse<TEntity> Execute<TEntity>() where TEntity : class, new()
         {
+            // force TLSv1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+
             StartTimer();
             var response = RestClient.Execute<TEntity>(RestRequest);
             StopTimer();
@@ -54,6 +60,11 @@ namespace Facebook.ApiClient.ApiEngine
         public async Task<IResponse<TEntity>> ExecuteAsync<TEntity>()
             where TEntity : class, new()
         {
+            // force TLSv1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+
             StartTimer();
             var response = await RestClient.ExecuteTaskAsync<TEntity>(RestRequest);
             StopTimer();
@@ -67,6 +78,11 @@ namespace Facebook.ApiClient.ApiEngine
         /// <inheritdoc />
         public IResponse<string> Execute()
         {
+            // force TLSv1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+
             StartTimer();
             var response = RestClient.Execute(RestRequest);
             StartTimer();
