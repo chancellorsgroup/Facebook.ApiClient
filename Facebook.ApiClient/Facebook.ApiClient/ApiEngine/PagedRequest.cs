@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Net;
 using System.Threading.Tasks;
 using Facebook.ApiClient.Enumerations.ApiEngine;
 using Facebook.ApiClient.Exceptions;
@@ -26,6 +27,9 @@ namespace Facebook.ApiClient.ApiEngine
         /// <inheritdoc />
         public IPagedResponse<TEntity> ExecutePage<TEntity>() where TEntity : class, new()
         {
+            // force TLSv1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             StartTimer();
             var response = RestClient.Execute<PagedResponse<TEntity>>(RestRequest);
             StopTimer();
@@ -39,6 +43,9 @@ namespace Facebook.ApiClient.ApiEngine
         /// <inheritdoc />
         public async Task<IPagedResponse<TEntity>> ExecutePageAsync<TEntity>() where TEntity : class, new()
         {
+            // force TLSv1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             StartTimer();
             var response = await RestClient.ExecuteTaskAsync<PagedResponse<TEntity>>(RestRequest);
             StopTimer();
