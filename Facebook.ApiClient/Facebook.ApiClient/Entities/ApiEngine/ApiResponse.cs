@@ -19,6 +19,11 @@ namespace Facebook.ApiClient.Entities.ApiEngine
         private readonly TEntity _result;
 
         /// <summary>
+        /// API Response headers collection
+        /// </summary>
+        public IDictionary<string, string> ResponseHeaders { get; private set; }
+
+        /// <summary>
         /// List of exceptions from api response
         /// </summary>
         private readonly IEnumerable<Exception> _exceptions;
@@ -61,6 +66,9 @@ namespace Facebook.ApiClient.Entities.ApiEngine
             _result = response;
             _exceptions = exceptions;
             SetValuesFromResponceHeaders(headerParameters);
+
+            var parameters = headerParameters as IList<Parameter> ?? headerParameters.ToList();
+            ResponseHeaders = parameters.ToDictionary(parameter => parameter.Name, parameter => parameter.Value.ToString());
         }
 
         private void SetValuesFromResponceHeaders(IList<Parameter> headerParameters)
