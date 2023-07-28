@@ -43,6 +43,8 @@ namespace Facebook.ApiClient.ApiEngine
         {
             // force TLSv1.2
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.DefaultConnectionLimit = 9999;
 
             StartTimer();
             var response = RestClient.Execute<TEntity>(RestRequest);
@@ -60,6 +62,8 @@ namespace Facebook.ApiClient.ApiEngine
         {
             // force TLSv1.2
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.DefaultConnectionLimit = 9999;
 
             StartTimer();
             var response = await RestClient.ExecuteTaskAsync<TEntity>(RestRequest);
@@ -76,6 +80,8 @@ namespace Facebook.ApiClient.ApiEngine
         {
             // force TLSv1.2
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.DefaultConnectionLimit = 9999;
 
             StartTimer();
             var response = RestClient.Execute(RestRequest);
